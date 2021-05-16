@@ -6,7 +6,7 @@
     <div class="d-block text-left">
       <p>Diese Anwendung wurde im Sommersemster 2021 im Rahmen des Moduls Mensch-Computer-Interaktion an 
       der Universität Bonn entwickelt.</p>
-
+      <p><a href="https://github.com/p3l1/fitts-law-experiment">Zum GitHub Projekt</a></p>
       <b-list-group>
         <b-list-group-item><strong>Verwendete Projekte / Lizenzen</strong></b-list-group-item>
         <b-list-group-item href="https://www.npmjs.com/package/vue-json-csv">vue-json-csv - MIT</b-list-group-item>
