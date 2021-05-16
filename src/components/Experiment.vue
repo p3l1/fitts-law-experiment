@@ -1,7 +1,7 @@
 <template>
   <div class="experiment-wrapper" :style="{ width: (2*width + distance) + 'px' }">
-    <div @click="clickBar('left')" class="bar left" :class="{ active: bars.left.isActive }" :style="{ width: width + 'px' }" />
-    <div @click="clickBar('right')" class="bar right" :class="{ active: bars.right.isActive }" :style="{ margin: '0 0 0 ' + (width + distance) + 'px', width: width + 'px' }" />
+    <div @click="clickBar('left')" class="bar left" :class="{ active: bars.left.isActive, done: experiment.isCompleted }" :style="{ width: width + 'px' }" />
+    <div @click="clickBar('right')" class="bar right" :class="{ active: bars.right.isActive, done: experiment.isCompleted }" :style="{ margin: '0 0 0 ' + (width + distance) + 'px', width: width + 'px' }" />
   </div>
 </template>
 
@@ -11,7 +11,8 @@ export default {
   props: [
     'width',
     'distance',
-    'isRunning'
+    'isRunning',
+    'iterations'
   ],
   data: () => {
     return {
@@ -27,7 +28,6 @@ export default {
         isReady: false,
         isCompleted: false,
         clickCounter: 0,
-        clickCounterCap: 10,
         startTime: 0,
         data: []
       }
@@ -76,7 +76,7 @@ export default {
 
       // Catches click if counter is exceeded
       // Experiment is finished
-      if (!(this.experiment.clickCounter < this.experiment.clickCounterCap)) {
+      if (!(this.experiment.clickCounter < this.iterations)) {
         console.log('Counter exceeded', this.experiment.clickCounter)
         this.$parent.isRunning = false;
         this.experiment.isCompleted = true;
@@ -114,10 +114,9 @@ export default {
 <style scoped>
 .experiment-wrapper {
   display: block;
-  width: 650px;
-  height: 100vh;
-  margin: auto;
-  padding: 12rem 0;
+  height: auto;
+  margin: 0 auto;
+  padding: 12rem 0 0 0;
 }
 .experiment-wrapper .bar {
   background-color: #fff;
@@ -132,6 +131,10 @@ export default {
 }
 
 .experiment-wrapper .bar.active {
-  background-color: crimson;
+  background-color: #dc3545;
+}
+
+.experiment-wrapper .bar.done {
+  background-color: #28a745;
 }
 </style>
